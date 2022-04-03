@@ -12,12 +12,18 @@ class GetConcreteDateTrivia extends UseCase<DateTrivia, Params> {
 
   @override
   Future<Either<Failure, DateTrivia>> call(Params params) async {
-    return await repository.getConcreteDateTrivia(params.date);
+    return await repository.getConcreteDateTrivia(params.year);
   }
+
+  @override
+  List<Object?> get props => [];
 }
 
 class Params extends Equatable {
-  final String date;
+  final int year;
 
-  Params({required this.date}) : super([date]);
+  const Params({required this.year}) : super();
+
+  @override
+  List<Object?> get props => [year];
 }

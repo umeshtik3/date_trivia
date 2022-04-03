@@ -14,23 +14,23 @@ class MockDateTriviaRepository extends Mock implements DateTriviaRepository {
 @GenerateMocks([DateTriviaRepository])
 void main() {
   GetRandomDateTrivia? usecase;
-  MockDateTriviaRepository? mockDateTriviaRepository;
+  MockDateTriviaRepository mockDateTriviaRepository = MockDateTriviaRepository();
   setUp(
     () {
       mockDateTriviaRepository = MockDateTriviaRepository();
-      usecase = GetRandomDateTrivia(mockDateTriviaRepository!);
+      usecase = GetRandomDateTrivia(mockDateTriviaRepository);
     },
   );
   
-  final DateTrivia testTrivia = DateTrivia(text: '', date: '4/2');
-  test('should get date from repository', () async {
-    when(mockDateTriviaRepository?.getRandomDateTrivia())
-        .thenAnswer((_) async => Right(testTrivia));
+  const DateTrivia testTrivia =  DateTrivia(text: '', year: 1996);
+  test('should get date from repository', () async* {
+    when(mockDateTriviaRepository.getRandomDateTrivia())
+        .thenAnswer((_) async => const Right(testTrivia));
 
     final result = await usecase!(NoParams());
 
-    expect(result, Right(testTrivia));
-    verify(mockDateTriviaRepository!.getRandomDateTrivia());
+    expect(result, const Right(testTrivia));
+    verify(mockDateTriviaRepository.getRandomDateTrivia());
     verifyNoMoreInteractions(mockDateTriviaRepository);
   });
 }

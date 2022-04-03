@@ -16,16 +16,16 @@ dependencies:
   # Bloc for state management
   flutter_bloc: ^0.21.0
   # Value equality
-  equatable: ^0.4.0
+  equatable: ^2.0.3
   # Functional programming thingies
-  dartz: ^0.8.6
+  dartz: ^0.10.1
   # Remote API
-  connectivity: ^0.4.3+7
   http: ^0.13.4
   # Local cache
-  shared_preferences: ^0.5.3+4
 
   cupertino_icons: ^1.0.2
+  connectivity_plus: ^0.0.1
+  shared_preferences: ^0.5.5
 
 dev_dependencies:
   flutter_test:
