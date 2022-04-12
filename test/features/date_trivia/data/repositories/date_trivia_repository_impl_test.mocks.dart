@@ -2,11 +2,11 @@
 // in date_trivia/test/features/date_trivia/data/repositories/date_trivia_repository_impl_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:date_trivia/core/platform/network_info.dart' as _i3;
 import 'package:date_trivia/features/date_trivia/data/data_sources/date_trivia_local_data_source.dart'
-    as _i6;
+    as _i5;
 import 'package:date_trivia/features/date_trivia/data/data_sources/date_trivia_remote_data_source.dart'
     as _i4;
 import 'package:date_trivia/features/date_trivia/data/models/date_trivia_model.dart'
@@ -38,51 +38,44 @@ class MockNetworkInfo extends _i1.Mock implements _i3.NetworkInfo {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDateTriviaRemoteDataSourceForTest extends _i1.Mock
-    implements _i4.DateTriviaRemoteDataSource {
-  @override
-  _i5.Future<_i2.DateTriviaModel> getRandomDateTrivia() =>
-      (super.noSuchMethod(Invocation.method(#getRandomDateTrivia, []),
-              returnValue:
-                  Future<_i2.DateTriviaModel>.value(_FakeDateTriviaModel_0()))
-          as _i5.Future<_i2.DateTriviaModel>);
-}
+    implements _i4.DateTriviaRemoteDataSource {}
 
 /// A class which mocks [DateTriviaLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDateTriviaLocalDataSource extends _i1.Mock
-    implements _i6.DateTriviaLocalDataSource {
+    implements _i5.DateTriviaLocalDataSource {
   MockDateTriviaLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.DateTriviaModel> getLastDateTrivia() =>
+  _i6.Future<_i2.DateTriviaModel> getLastDateTrivia() =>
       (super.noSuchMethod(Invocation.method(#getLastDateTrivia, []),
               returnValue:
                   Future<_i2.DateTriviaModel>.value(_FakeDateTriviaModel_0()))
-          as _i5.Future<_i2.DateTriviaModel>);
+          as _i6.Future<_i2.DateTriviaModel>);
   @override
-  _i5.Future<void> cachedDateTrivia(_i2.DateTriviaModel? triviaToCache) =>
+  _i6.Future<void> cachedDateTrivia(_i2.DateTriviaModel? triviaToCache) =>
       (super.noSuchMethod(Invocation.method(#cachedDateTrivia, [triviaToCache]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }
 
 /// A class which mocks [DateTriviaLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDateTriviaLocalDataSourceForTest extends _i1.Mock
-    implements _i6.DateTriviaLocalDataSource {
+    implements _i5.DateTriviaLocalDataSource {
   @override
-  _i5.Future<_i2.DateTriviaModel> getLastDateTrivia() =>
+  _i6.Future<_i2.DateTriviaModel> getLastDateTrivia() =>
       (super.noSuchMethod(Invocation.method(#getLastDateTrivia, []),
               returnValue:
                   Future<_i2.DateTriviaModel>.value(_FakeDateTriviaModel_0()))
-          as _i5.Future<_i2.DateTriviaModel>);
+          as _i6.Future<_i2.DateTriviaModel>);
   @override
-  _i5.Future<void> cachedDateTrivia(_i2.DateTriviaModel? triviaToCache) =>
+  _i6.Future<void> cachedDateTrivia(_i2.DateTriviaModel? triviaToCache) =>
       (super.noSuchMethod(Invocation.method(#cachedDateTrivia, [triviaToCache]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }
