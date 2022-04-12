@@ -1,14 +1,17 @@
-import 'package:date_trivia/features/date_trivia/domain/entities/date_trivia.dart';
+import '../../domain/entities/date_trivia.dart';
 
 class DateTriviaModel extends DateTrivia {
-  const DateTriviaModel({required String? text, required int? year})
-      : super(text: text, year: year);
+  const DateTriviaModel({
+    required String? text,
+  }) : super(text: text);
 
   factory DateTriviaModel.fromJson(Map<String, dynamic> map) {
-    return DateTriviaModel(text: map['text'], year: map['year']);
+    return DateTriviaModel(text: map['text']);
   }
 
   Map<String, dynamic> toJson() {
-    return {'text': text, 'year': year};
+    return {
+      'text': text,
+    };
   }
 }

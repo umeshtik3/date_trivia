@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:date_trivia/core/error/failures.dart';
-import 'package:date_trivia/core/usecase/usecase.dart';
-import 'package:date_trivia/features/date_trivia/domain/entities/date_trivia.dart';
-import 'package:date_trivia/features/date_trivia/domain/repositories/date_trivia_repository.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../entities/date_trivia.dart';
+import '../repositories/date_trivia_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class GetConcreteDateTrivia extends UseCase<DateTrivia, Params> {
@@ -11,8 +11,8 @@ class GetConcreteDateTrivia extends UseCase<DateTrivia, Params> {
   GetConcreteDateTrivia(this.repository);
 
   @override
-  Future<Either<Failure, DateTrivia>> call(Params params) async {
-    return await repository.getConcreteDateTrivia(params.year);
+  Future<Either<Failure, DateTrivia>?> call(Params params) async {
+    return await repository.getConcreteDateTrivia(params.date);
   }
 
   @override
@@ -20,10 +20,10 @@ class GetConcreteDateTrivia extends UseCase<DateTrivia, Params> {
 }
 
 class Params extends Equatable {
-  final int year;
+  final String? date;
 
-  const Params({required this.year}) : super();
+  const Params({required this.date}) : super();
 
   @override
-  List<Object?> get props => [year];
+  List<Object?> get props => [date];
 }

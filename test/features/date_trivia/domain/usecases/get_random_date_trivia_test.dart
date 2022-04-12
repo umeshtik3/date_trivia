@@ -8,21 +8,23 @@ import 'package:mockito/annotations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockDateTriviaRepository extends Mock implements DateTriviaRepository {
-}
+import 'get_random_date_trivia_test.mocks.dart';
+
+
+
 
 @GenerateMocks([DateTriviaRepository])
 void main() {
   GetRandomDateTrivia? usecase;
-  MockDateTriviaRepository mockDateTriviaRepository = MockDateTriviaRepository();
+  final mockDateTriviaRepository = MockDateTriviaRepository();
   setUp(
     () {
-      mockDateTriviaRepository = MockDateTriviaRepository();
+      // mockDateTriviaRepository = MockDateTriviaRepository();
       usecase = GetRandomDateTrivia(mockDateTriviaRepository);
     },
   );
   
-  const DateTrivia testTrivia =  DateTrivia(text: '', year: 1996);
+  const DateTrivia testTrivia =  DateTrivia(text: '',);
   test('should get date from repository', () async* {
     when(mockDateTriviaRepository.getRandomDateTrivia())
         .thenAnswer((_) async => const Right(testTrivia));

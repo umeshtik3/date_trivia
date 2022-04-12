@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../../fixure/fixure_reader.dart';
 
 void main() {
-  const tDateTriviaModel = DateTriviaModel(year: 1900, text: 'Test text');
+  const tDateTriviaModel = DateTriviaModel( text: 'Test text');
 
   test('should be a sub class of date trivia entity', () async {
     expect(tDateTriviaModel, isA<DateTrivia>());

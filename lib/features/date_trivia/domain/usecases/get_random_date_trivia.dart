@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:date_trivia/core/error/failures.dart';
-import 'package:date_trivia/core/usecase/usecase.dart';
-import 'package:date_trivia/features/date_trivia/domain/entities/date_trivia.dart';
-import 'package:date_trivia/features/date_trivia/domain/repositories/date_trivia_repository.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../entities/date_trivia.dart';
+import '../repositories/date_trivia_repository.dart';
 
 class GetRandomDateTrivia extends UseCase<DateTrivia, NoParams> {
   final DateTriviaRepository repository;
@@ -11,7 +12,7 @@ class GetRandomDateTrivia extends UseCase<DateTrivia, NoParams> {
 
   @override
   // ignore: avoid_renaming_method_parameters
-  Future<Either<Failure, DateTrivia>> call(NoParams noParams) async {
+  Future<Either<Failure, DateTrivia>?> call(NoParams noParams) async {
     return await repository.getRandomDateTrivia();
   }
 

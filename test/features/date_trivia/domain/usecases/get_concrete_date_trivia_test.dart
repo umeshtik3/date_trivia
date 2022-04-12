@@ -6,28 +6,38 @@ import 'package:mockito/annotations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockDateTriviaRepository extends Mock implements DateTriviaRepository {}
+import 'get_random_date_trivia_test.mocks.dart';
 
-@GenerateMocks([DateTriviaRepository])
+
+// class MockDateTriviaRepository extends Mock implements DateTriviaRepository {}
+
+@GenerateMocks([
+  DateTriviaRepository
+], customMocks: [
+  MockSpec<DateTriviaRepository>(
+      as: #MockDateTriviaRepositoryForTest, returnNullOnMissingStub: true)
+])
 void main() {
   GetConcreteDateTrivia? usecase;
-  MockDateTriviaRepository? mockDateTriviaRepository;
+  final  mockDateTriviaRepository = MockDateTriviaRepository();
   setUp(
     () {
-      mockDateTriviaRepository = MockDateTriviaRepository();
-      usecase = GetConcreteDateTrivia(mockDateTriviaRepository!);
+      // mockDateTriviaRepository = MockDateTriviaRepository();
+      usecase = GetConcreteDateTrivia(mockDateTriviaRepository);
     },
   );
-  const testDate = 1996;
-  const DateTrivia testTrivia = DateTrivia(text: '', year: testDate);
-  test('should get date from repository', () async* {
-    when(mockDateTriviaRepository?.getConcreteDateTrivia(any))
+  const testDate = '4/2';
+  const DateTrivia testTrivia = DateTrivia(
+    text: '',
+  );
+  test('should get date from repository', () async {
+    when(mockDateTriviaRepository.getConcreteDateTrivia(any))
         .thenAnswer((_) async => const Right(testTrivia));
 
-    final result = await usecase!(const Params(year: testDate));
+    final result = await usecase!(const Params(date: testDate));
 
     expect(result, const Right(testTrivia));
-    verify(mockDateTriviaRepository?.getConcreteDateTrivia(testDate));
+    verify(mockDateTriviaRepository.getConcreteDateTrivia(testDate));
     verifyNoMoreInteractions(mockDateTriviaRepository);
   });
 }
