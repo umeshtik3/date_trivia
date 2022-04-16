@@ -32,7 +32,7 @@ class DateTriviaRepositoryImpl implements DateTriviaRepository {
     } else {
       try {
         final localTrivia = await localDataSource.getLastDateTrivia();
-        return Right(localTrivia);
+        return Right(localTrivia!);
       } on CacheException {
         return Left(CacheFailures());
       }
@@ -53,7 +53,7 @@ class DateTriviaRepositoryImpl implements DateTriviaRepository {
     } else {
       try {
         final localTrivia = await localDataSource.getLastDateTrivia();
-        return Right(localTrivia);
+        return Right(localTrivia!);
       } on CacheException {
         return Left(CacheFailures());
       }
