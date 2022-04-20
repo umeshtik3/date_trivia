@@ -1,6 +1,6 @@
 import 'package:date_trivia/core/error/exceptions.dart';
 
-import '../../../../core/platform/network_info.dart';
+import '../../../../core/network/network_info.dart';
 import '../../domain/entities/date_trivia.dart';
 import '../../../../core/error/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -21,7 +21,7 @@ class DateTriviaRepositoryImpl implements DateTriviaRepository {
   Future<Either<Failure, DateTrivia>>? getConcreteDateTrivia(
       String? date) async {
     bool? isConnected = await networkInfo.isConnected;
-    if (isConnected!) {
+    if (isConnected) {
       try {
         final dateTrivia = await remoteDataSource.getConcreteDateTrivia(date);
         localDataSource.cachedDateTrivia(dateTrivia!);
@@ -42,7 +42,7 @@ class DateTriviaRepositoryImpl implements DateTriviaRepository {
   @override
   Future<Either<Failure, DateTrivia>>? getRandomDateTrivia() async {
     bool? isConnected = await networkInfo.isConnected;
-    if (isConnected!) {
+    if (isConnected) {
       try {
         final remoteTrivia = await remoteDataSource.getRandomDateTrivia();
         localDataSource.cachedDateTrivia(remoteTrivia!);

@@ -12,6 +12,8 @@ class InputConverter {
     for (int i = 0; i <= 12; i++) {
       if (int.parse(splittedDate[0]) == i) {
         resultDate = '' + splittedDate[0];
+        isValidate = true;
+        break;
       } else {
         isValidate = false;
       }
@@ -20,6 +22,8 @@ class InputConverter {
     for (int j = 0; j <= 31; j++) {
       if (int.parse(splittedDate[1]) == j) {
         resultDate = resultDate + "/" + splittedDate[1];
+        isValidate = true;
+        break;
       } else {
         isValidate = false;
       }

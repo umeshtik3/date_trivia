@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:date_trivia/core/error/exceptions.dart';
 import 'package:date_trivia/core/error/failures.dart';
-import 'package:date_trivia/core/platform/network_info.dart';
+import 'package:date_trivia/core/network/network_info.dart';
 import 'package:date_trivia/features/date_trivia/data/data_sources/date_trivia_local_data_source.dart';
 import 'package:date_trivia/features/date_trivia/data/data_sources/date_trivia_remote_data_source.dart';
 import 'package:date_trivia/features/date_trivia/data/models/date_trivia_model.dart';

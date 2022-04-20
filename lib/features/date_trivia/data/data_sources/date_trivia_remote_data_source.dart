@@ -19,7 +19,9 @@ abstract class DateTriviaRemoteDataSource {
 
 class DateTriviaRemoteDataSourceImpl implements DateTriviaRemoteDataSource {
   final http.Client client;
-  DateTriviaRemoteDataSourceImpl(this.client);
+  DateTriviaRemoteDataSourceImpl(
+    this.client,
+  );
   @override
   Future<DateTriviaModel>? getConcreteDateTrivia(String? date) async {
     return _getDateTriviaFromUrl('http://numbersapi.com/$date/date');
@@ -27,7 +29,7 @@ class DateTriviaRemoteDataSourceImpl implements DateTriviaRemoteDataSource {
 
   @override
   Future<DateTriviaModel>? getRandomDateTrivia() async {
-    return _getDateTriviaFromUrl('http://numbersapi.com/#random/date');
+    return _getDateTriviaFromUrl('http://numbersapi.com/random/date');
   }
 
   Future<DateTriviaModel> _getDateTriviaFromUrl(String url) async {
@@ -36,6 +38,8 @@ class DateTriviaRemoteDataSourceImpl implements DateTriviaRemoteDataSource {
       headers: {'Content-Type': 'application/json'},
     );
     if (result.statusCode == 200) {
+      // ignore: avoid_print
+      print('result ---> ${result.body}');
       return DateTriviaModel.fromJson(json.decode(result.body));
     } else {
       throw ServerException();
