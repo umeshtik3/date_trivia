@@ -11,8 +11,11 @@ import '../../domain/entities/date_trivia.dart';
 part 'date_trivia_event.dart';
 part 'date_trivia_state.dart';
 
+// ignore: constant_identifier_names
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
+// ignore: constant_identifier_names
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
+// ignore: constant_identifier_names
 const String INVALID_INPUT_FAILURE_MESSAGE = 'Input is not valid';
 
 class DateTriviaBloc extends Bloc<DateTriviaEvent, DateTriviaState> {
@@ -24,7 +27,7 @@ class DateTriviaBloc extends Bloc<DateTriviaEvent, DateTriviaState> {
 
   DateTriviaBloc({this.getConcreteDateTrivia, this.getRandomDateTrivia, this.inputConverter}) : super(Empty()) {
     on<GetTriviaFromConcrete>((event, emit) async {
-      final inputEither =  inputConverter?.validateInputDateString(event.dateString!);
+      final inputEither = inputConverter?.validateInputDateString(event.dateString!);
       await inputEither?.fold((failure) {
         emit(const Error(message: INVALID_INPUT_FAILURE_MESSAGE));
       }, (integer) async {
@@ -44,6 +47,21 @@ class DateTriviaBloc extends Bloc<DateTriviaEvent, DateTriviaState> {
         emit(Error(message: _mapFailureToMessage(failure)));
       }, (trivia) {
         emit(Loaded(trivia: trivia));
+      });
+    });
+    on<GetTriviaFromTodaysDate>((event, emit) async {
+      emit(Loading());
+      final inputDate = inputConverter?.getTodaysDate();
+      // final result = await getConcreteDateTrivia!(Params(date: inputDate!));
+      await inputDate?.fold((failure) {
+        emit(const Error(message: INVALID_INPUT_FAILURE_MESSAGE));
+      }, (string) async {
+        final failureOrTrivia = await getConcreteDateTrivia!(Params(date: string));
+        failureOrTrivia?.fold((failure) {
+          emit(Error(message: _mapFailureToMessage(failure)));
+        }, (trivia) {
+          emit(Loaded(trivia: trivia));
+        });
       });
     });
   }

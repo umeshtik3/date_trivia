@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:date_trivia/core/error/failures.dart';
 import 'package:date_trivia/core/utils/input_converter.dart';
-import 'package:date_trivia/features/date_trivia/domain/entities/date_trivia.dart';
 import 'package:date_trivia/features/date_trivia/domain/usecases/get_concrete_date_trivia.dart';
 import 'package:date_trivia/features/date_trivia/domain/usecases/get_random_date_trivia.dart';
 import 'package:date_trivia/features/date_trivia/presentation/bloc/date_trivia_bloc.dart';
@@ -41,14 +40,13 @@ void main() {
   group(
     'GetConcreteNumberTrivia Event',
     () {
-      final tDate = '4/1';
-      final tDateTrivia = DateTrivia(text: tDate);
+      const tDate = '4/1';
 
       test(
         'should call input converter and validate a date in string',
         () async {
-          when(mockInputConverter?.validateInputDateString(any)).thenReturn(Right(tDate));
-          bloc?.add(GetTriviaFromConcrete(tDate));
+          when(mockInputConverter?.validateInputDateString(any)).thenReturn(const Right(tDate));
+          bloc?.add(const GetTriviaFromConcrete(tDate));
           await untilCalled(mockInputConverter?.validateInputDateString(any));
           verify(mockInputConverter?.validateInputDateString(tDate));
         },
@@ -59,7 +57,7 @@ void main() {
         final expected = [Empty(), const Error(message: INVALID_INPUT_FAILURE_MESSAGE)];
 
         expect(bloc?.state, emitsInOrder(expected));
-        bloc?.add(GetTriviaFromConcrete(tDate));
+        bloc?.add(const GetTriviaFromConcrete(tDate));
       });
     },
   );

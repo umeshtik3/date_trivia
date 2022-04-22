@@ -31,6 +31,20 @@ class InputConverter {
 
     return isValidate ? Right(resultDate) : Left(InvalidInputFailure());
   }
+
+  Either<Failure, String> getTodaysDate() {
+    String inputDate = _prepareInputDate();
+
+    return Right(inputDate);
+  }
+
+  String _prepareInputDate() {
+    var todaysDateTime = DateTime.now();
+    var todaysDay = todaysDateTime.day.toString();
+    var todaysMonth = todaysDateTime.month.toString();
+    String inputDate = todaysMonth + "/" + todaysDay;
+    return inputDate;
+  }
 }
 
 class InputFailure extends Failure {}

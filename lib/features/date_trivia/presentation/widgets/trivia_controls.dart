@@ -1,6 +1,6 @@
 import 'package:date_trivia/features/date_trivia/presentation/bloc/date_trivia_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TriviaControls extends StatefulWidget {
   const TriviaControls({
@@ -33,12 +33,12 @@ class _TriviaControlsState extends State<TriviaControls> {
             addConcrete();
           },
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           children: [
             Expanded(
               child: ElevatedButton(
-                child: Text('Search'),
+                child: const Text('Search'),
                 onPressed: addConcrete,
               ),
             ),

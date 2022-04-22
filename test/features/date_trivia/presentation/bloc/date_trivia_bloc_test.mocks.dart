@@ -34,6 +34,7 @@ class _FakeDateTriviaRepository_0 extends _i1.Fake
 /// A class which mocks [GetConcreteDateTrivia].
 ///
 /// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
 class MockGetConcreteDateTrivia extends _i1.Mock
     implements _i3.GetConcreteDateTrivia {
   MockGetConcreteDateTrivia() {
@@ -60,6 +61,7 @@ class MockGetConcreteDateTrivia extends _i1.Mock
 /// A class which mocks [GetRandomDateTrivia].
 ///
 /// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
 class MockGetRandomDateTrivia extends _i1.Mock
     implements _i8.GetRandomDateTrivia {
   MockGetRandomDateTrivia() {

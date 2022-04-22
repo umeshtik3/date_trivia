@@ -10,10 +10,12 @@ abstract class DateTriviaEvent extends Equatable {
 class GetTriviaFromConcrete extends DateTriviaEvent {
   final String? dateString;
 
-  const GetTriviaFromConcrete(this.dateString):super();
+  const GetTriviaFromConcrete(this.dateString) : super();
 
   @override
   List<Object> get props => [];
 }
 
 class GetTriviaFromRandom extends DateTriviaEvent {}
+
+class GetTriviaFromTodaysDate extends DateTriviaEvent {}
