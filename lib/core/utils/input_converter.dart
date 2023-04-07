@@ -19,15 +19,18 @@ class InputConverter {
       }
     }
 
-    for (int j = 0; j <= 31; j++) {
-      if (int.parse(splittedDate[1]) == j) {
-        resultDate = resultDate + "/" + splittedDate[1];
-        isValidate = true;
-        break;
-      } else {
-        isValidate = false;
+    if (isValidate) {
+      for (int j = 0; j <= 31; j++) {
+        if (int.parse(splittedDate[1]) == j) {
+          resultDate = resultDate + "/" + splittedDate[1];
+          isValidate = true;
+          break;
+        } else {
+          isValidate = false;
+        }
       }
     }
+   
 
     return isValidate ? Right(resultDate) : Left(InvalidInputFailure());
   }

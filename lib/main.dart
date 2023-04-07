@@ -3,7 +3,6 @@ import 'package:date_trivia/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/date_trivia/presentation/bloc/date_trivia_bloc.dart';
-import 'injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

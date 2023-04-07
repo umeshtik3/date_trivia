@@ -46,7 +46,7 @@ class _TriviaControlsState extends State<TriviaControls> {
             Expanded(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.grey.shade500,
+                  backgroundColor: Colors.grey.shade500,
                 ),
                 child: const Text('Get random trivia'),
                 onPressed: addRandom,

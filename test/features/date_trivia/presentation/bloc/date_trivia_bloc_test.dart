@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:date_trivia/core/error/failures.dart';
 import 'package:date_trivia/core/utils/input_converter.dart';
+import 'package:date_trivia/features/date_trivia/domain/entities/date_trivia.dart';
 import 'package:date_trivia/features/date_trivia/domain/usecases/get_concrete_date_trivia.dart';
 import 'package:date_trivia/features/date_trivia/domain/usecases/get_random_date_trivia.dart';
 import 'package:date_trivia/features/date_trivia/presentation/bloc/date_trivia_bloc.dart';
@@ -13,7 +14,6 @@ import 'date_trivia_bloc_test.mocks.dart';
 @GenerateMocks([GetConcreteDateTrivia])
 @GenerateMocks([GetRandomDateTrivia])
 @GenerateMocks([InputConverter])
-
 void main() {
   DateTriviaBloc? bloc;
   MockGetConcreteDateTrivia? mockGetConcreteDateTrivia;
@@ -26,7 +26,9 @@ void main() {
       mockGetRandomDateTrivia = MockGetRandomDateTrivia();
       mockInputConverter = MockInputConverter();
       bloc = DateTriviaBloc(
-          getConcreteDateTrivia: mockGetConcreteDateTrivia, getRandomDateTrivia: mockGetRandomDateTrivia, inputConverter: mockInputConverter);
+          getConcreteDateTrivia: mockGetConcreteDateTrivia,
+          getRandomDateTrivia: mockGetRandomDateTrivia,
+          inputConverter: mockInputConverter);
     },
   );
 
@@ -45,16 +47,22 @@ void main() {
       test(
         'should call input converter and validate a date in string',
         () async {
-          when(mockInputConverter?.validateInputDateString(any)).thenReturn(const Right(tDate));
+          when(mockInputConverter?.validateInputDateString(any))
+              .thenReturn(const Right(tDate));
           bloc?.add(const GetTriviaFromConcrete(tDate));
+          when(mockGetConcreteDateTrivia?.call(const Params(date: tDate))).thenAnswer((realInvocation) async => const Right<Failure,DateTrivia>(DateTrivia(text: 'date')));
           await untilCalled(mockInputConverter?.validateInputDateString(any));
           verify(mockInputConverter?.validateInputDateString(tDate));
         },
       );
 
       test('should emit [Error] when the input is invalid', () async* {
-        when(mockInputConverter?.validateInputDateString(any)).thenReturn(Left(InvalidInputFailure()));
-        final expected = [Empty(), const Error(message: INVALID_INPUT_FAILURE_MESSAGE)];
+        when(mockInputConverter?.validateInputDateString(any))
+            .thenReturn(Left(InvalidInputFailure()));
+        final expected = [
+          Empty(),
+          const Error(message: INVALID_INPUT_FAILURE_MESSAGE)
+        ];
 
         expect(bloc?.state, emitsInOrder(expected));
         bloc?.add(const GetTriviaFromConcrete(tDate));

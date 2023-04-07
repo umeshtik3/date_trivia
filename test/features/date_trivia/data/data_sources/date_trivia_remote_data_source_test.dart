@@ -15,19 +15,23 @@ import 'date_trivia_remote_data_source_test.mocks.dart';
 void main() {
   DateTriviaRemoteDataSourceImpl? dateTriviaRemoteDataSourceImpl;
   MockClient? mockClient;
-  final tDateTriviaModel = DateTriviaModel.fromJson(json.decode(fixure('trivia.json')));
+  final tDateTriviaModel =
+      DateTriviaModel.fromJson(json.decode(fixure('trivia.json')));
 
   setUp(() {
     mockClient = MockClient();
-    dateTriviaRemoteDataSourceImpl = DateTriviaRemoteDataSourceImpl(mockClient!);
+    dateTriviaRemoteDataSourceImpl =
+        DateTriviaRemoteDataSourceImpl(mockClient!);
   });
 
   void setUpMockClientSuccess200() {
-    when(mockClient?.get(any, headers: anyNamed('headers'))).thenAnswer((realInvocation) async => http.Response(fixure('trivia.json'), 200));
+    when(mockClient?.get(any, headers: anyNamed('headers'))).thenAnswer(
+        (realInvocation) async => http.Response(fixure('trivia.json'), 200));
   }
 
   void setUpMockClientFailure404() {
-    when(mockClient?.get(any, headers: anyNamed('headers'))).thenAnswer((realInvocation) async => http.Response('Something went wrong', 404));
+    when(mockClient?.get(any, headers: anyNamed('headers'))).thenAnswer(
+        (realInvocation) async => http.Response('Something went wrong', 404));
   }
 
   group('getConcreteDateTrivia', () {
@@ -37,7 +41,8 @@ void main() {
       () {
         setUpMockClientSuccess200();
         dateTriviaRemoteDataSourceImpl?.getConcreteDateTrivia(tDAte);
-        verify(mockClient?.get(Uri.parse('http://numbersapi.com/$tDAte/date'), headers: {'Content-Type': 'application/json'}));
+        verify(mockClient?.get(Uri.parse('http://numbersapi.com/$tDAte/date'),
+            headers: {'Content-Type': 'application/json'}));
       },
     );
 
@@ -45,12 +50,15 @@ void main() {
       'should return Date Trivia when status code is 200 (success)',
       () async {
         setUpMockClientSuccess200();
-        final result = await dateTriviaRemoteDataSourceImpl?.getConcreteDateTrivia(tDAte);
+        final result =
+            await dateTriviaRemoteDataSourceImpl?.getConcreteDateTrivia(tDAte);
         expect(result, equals(tDateTriviaModel));
       },
     );
 
-    test('should throw a ServerException when the response code is 404 or other', () async {
+    test(
+        'should throw a ServerException when the response code is 404 or other',
+        () async {
       setUpMockClientFailure404();
       final call = dateTriviaRemoteDataSourceImpl!.getConcreteDateTrivia;
       expect(() => call(tDAte), throwsA(const TypeMatcher<ServerException>()));
@@ -59,11 +67,11 @@ void main() {
 
   group('getRandomDateTrivia', () {
     test(
-         'should perform GET request on a URL with random endpoint',
+      'should perform GET request on a URL with random endpoint',
       () {
         setUpMockClientSuccess200();
         dateTriviaRemoteDataSourceImpl?.getRandomDateTrivia();
-        verify(mockClient?.get(Uri.parse('http://numbersapi.com/#random/date'), headers: {'Content-Type': 'application/json'}));
+        verify(mockClient?.get(Uri.parse('http://numbersapi.com/random/date'), headers: {'Content-Type': 'application/json'}));
       },
     );
 
@@ -71,21 +79,22 @@ void main() {
       'should return Date Trivia when status code is 200 (success)',
       () async {
         setUpMockClientSuccess200();
-        final result = await dateTriviaRemoteDataSourceImpl?.getRandomDateTrivia();
+        final result =
+            await dateTriviaRemoteDataSourceImpl?.getRandomDateTrivia();
         expect(result, equals(tDateTriviaModel));
       },
     );
 
-      test(
-    'should throw a ServerException when the response code is 404 or other',
-    () async {
-      // arrange
-      setUpMockClientFailure404();
-      // act
-      final call = dateTriviaRemoteDataSourceImpl!.getRandomDateTrivia;
-      // assert
-      expect(() => call(), throwsA(const TypeMatcher<ServerException>()));
-    },
-  );
+    test(
+      'should throw a ServerException when the response code is 404 or other',
+      () async {
+        // arrange
+        setUpMockClientFailure404();
+        // act
+        final call = dateTriviaRemoteDataSourceImpl!.getRandomDateTrivia;
+        // assert
+        expect(() => call(), throwsA(const TypeMatcher<ServerException>()));
+      },
+    );
   });
 }

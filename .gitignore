@@ -8,6 +8,9 @@
 .buildlog/
 .history
 .svn/
+*.lock
+/coverage
+*.hive
 
 # IntelliJ related
 *.iml
@@ -15,10 +18,11 @@
 *.iws
 .idea/
 
+
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
-#.vscode/
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -32,11 +36,9 @@
 /build/
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
-
 # Obfuscation related
 app.*.map.json
 
@@ -44,3 +46,75 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+
+# Libraries auto-generated related
+*.mocks.dart
+*.freezed.dart
+*.g.dart
+injector.config.dart
+
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/Podfile
+
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugin_registrant.h
+linux/flutter/generated_plugin_registrant.cc
+linux/flutter/generated_plugin_registrant.h
+windows/flutter/Generated.props
+
+windows/Generated.props
+
+workspace.code-workspace
+
+*.code-workspace
+
+profile
+*.gcno
+Pods/*
+Podfile.lock
+
+*~.nib
+
+DerivedData/
+
+build/
+
+
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+#    NB: also, whitelist the default ones, some projects need to use these
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+
+xcuserdata
+
+!Podfile.lock
+!Manifest.lock
+*.xccheckout
+env.sh
+.idea
+.symlinks/
+
+####
+# Flutter related
+####
+.vagrant/
+.sconsign.dblite
+
+
+/ios/Flutter/app.flx
+/ios/Flutter/app.zip
+/ios/Flutter/flutter_assets/
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/ServiceDefinitions.json
+
+*sync/
+Icon?
+.tags*
