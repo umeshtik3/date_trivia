@@ -1,7 +1,6 @@
 // service locator
 import 'package:date_trivia/core/network/network_info.dart';
 import 'package:get_it/get_it.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/utils/input_converter.dart';
@@ -17,12 +16,14 @@ import 'package:http/http.dart' as http;
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  sl.registerFactory(() => DateTriviaBloc(getConcreteDateTrivia: sl(), getRandomDateTrivia: sl(), inputConverter: sl()));
+  sl.registerFactory(() => DateTriviaBloc(
+      getConcreteDateTrivia: sl(),
+      getRandomDateTrivia: sl(),
+      inputConverter: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetConcreteDateTrivia(sl()));
   sl.registerLazySingleton(() => GetRandomDateTrivia(sl()));
-  
 
   // Repository
   sl.registerLazySingleton<DateTriviaRepository>(() => DateTriviaRepositoryImpl(
@@ -31,17 +32,20 @@ Future<void> init() async {
         networkInfo: sl(),
       ));
   // Data sources
-  sl.registerLazySingleton<DateTriviaRemoteDataSource>(() => DateTriviaRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<DateTriviaRemoteDataSource>(
+      () => DateTriviaRemoteDataSourceImpl(sl()));
 
-  sl.registerLazySingleton<DateTriviaLocalDataSource>(() => DateTriviaLocalDataSourceImpl(sl()));
+  sl.registerLazySingleton<DateTriviaLocalDataSource>(
+      () => DateTriviaLocalDataSourceImpl(sl()));
 
   //! Core
   sl.registerLazySingleton(() => InputConverter());
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl<InternetConnectionChecker>()));
+  sl.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl());
 
-  //! External  
+  //! External
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+  // sl.registerLazySingleton(() => InternetConnectionChecker());
 }
